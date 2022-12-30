@@ -25,6 +25,7 @@ public class Main {
             gameBoard = updateGameBoard(gameBoard, guessCoordinates, locationViewUpdate);
             GameBoard.printGameBoard(gameBoard, water, ship);
         }
+        System.out.println("You Won!");
     }
 
     private static char[][] updateGameBoard(char[][] gameBoard, int[] guessCoordinates, char locationViewUpdate) {
@@ -47,7 +48,7 @@ public class Main {
         } else if (target == water)
         {
             message = "Miss!";
-            target = water;
+            target = miss;
         } else
         {
             message = "Already hit!";
