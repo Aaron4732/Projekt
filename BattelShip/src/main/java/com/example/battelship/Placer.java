@@ -53,14 +53,14 @@ public class Placer {
 
             for (;;) {
                 //grid.printGridShips();
-                GameBoard.printGameBoard(gameBord, water, ship);
+                GameBoard.printGameBoardWhitShips(gameBord, water, ship);
                 System.out.println("Place select the start Position");
 
                 System.out.print("X:");
-                setStartCoordinatX(scanner.nextInt());
+                setStartCoordinatX(scanner.nextInt() -1);
 
                 System.out.print("Y:");
-                setStartCoordinatY(scanner.nextInt());
+                setStartCoordinatY(scanner.nextInt() -1);
 
                 System.out.print("Select the direktion Down[D], Right[R]");
                 String direction = scanner.next();
@@ -74,7 +74,7 @@ public class Placer {
             }
 
             placeShip();
-            //grid.printGridShips();
+            GameBoard.printGameBoardWhitShips(gameBord, water, ship);
         }
     }
 
@@ -126,7 +126,7 @@ public class Placer {
 
                 //return false when a field is not free
                 //grid.getPositionShipsGrid(startCoordinatX + k,startCoordinatY +i)
-                if (gameBord[startCoordinatY + k][startCoordinatX + k] > ship) {
+                if (gameBord[startCoordinatY + k][startCoordinatX + k] == ship) {
                     return false;
                 }
             }

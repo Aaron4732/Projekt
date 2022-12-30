@@ -43,6 +43,28 @@ public class GameBoard {
         }
     }
 
+    public static void printGameBoardWhitShips(char[][] gameBoard, char water, char ship)
+    {
+        int gameBoardLength = gameBoard.length;
+        System.out.print("  ");
+
+        for (int i = 0; i < gameBoardLength; i++)
+        {
+            System.out.print(i + 1 + " ");
+        }
+        System.out.println();
+        for(int row = 0; row < gameBoardLength; row++) {
+            System.out.print(row + 1 + " ");
+            for (int col = 0; col < gameBoardLength; col++) {
+                char position = gameBoard[row][col];
+
+                System.out.print(position + " ");
+                }
+
+            System.out.println();
+            }
+        }
+
     public static char[][] placeShips(char[][] gameBoard, char water, char ship) {
         return gameBoard;
     }
