@@ -11,7 +11,7 @@ public class Main {
         int shipNumber = 3;
 
         char[][] gameBoard = GameBoard.createGameBoard(gameBoardLength, water, ship, shipNumber);
-        printGameBoard(gameBoard, water, ship);
+        GameBoard.printGameBoard(gameBoard, water, ship);
         int undetectedShipNumber = shipNumber;
 
         while (undetectedShipNumber < 0)
@@ -23,7 +23,7 @@ public class Main {
                 undetectedShipNumber--;
             }
             gameBoard = updateGameBoard(gameBoard, guessCoordinates, locationViewUpdate);
-            printGameBoard(GameBoard, water, ship)
+            GameBoard.printGameBoard(gameBoard, water, ship);
         }
     }
 
