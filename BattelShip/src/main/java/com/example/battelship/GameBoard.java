@@ -65,7 +65,17 @@ public class GameBoard {
             }
         }
 
-    public static char[][] placeShips(char[][] gameBoard, char water, char ship) {
+    public static char[][] placeShipsRandom(char[][] gameBoard, int shipNumber, char water, char ship) {
+        int placedShips = 0;
+        int gameBoardLength = gameBoard.length;
+        while (placedShips < shipNumber) {
+            int[] location = generateShipCoordinates(gameBoardLength);
+            char possiblePlacement = gameBoard[location[0]][location[1]];
+            if (possiblePlacement == water) {
+                gameBoard[location[0]][location[1]] = ship;
+                placedShips++;
+            }
+        }
         return gameBoard;
     }
 
