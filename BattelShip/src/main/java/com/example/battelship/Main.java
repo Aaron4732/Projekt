@@ -9,14 +9,14 @@ public class Main {
         char hit = 'X';
         char miss = 'O';
 
-        int shipsWhitSize2 = 1;
-        int shipsWhitSize3 = 0;
-        int shipsWhitSize4 = 0;
+        int shipsWhitSize2 = 0;
+        int shipsWhitSize3 = 1;
+        int shipsWhitSize4 = 1;
         int shipsWhitSize5 = 0;
 
         int shipNumber = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
 
-        char[][] gameBoard = GameBoard.createGameBoard(gameBoardLength, water, ship, shipNumber);
+        char[][] gameBoard = GameBoard.createGameBoard(gameBoardLength, water, ship,shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5 );
         GameBoard.printGameBoard(gameBoard, water, ship);
         int undetectedShipNumber = shipNumber;
 

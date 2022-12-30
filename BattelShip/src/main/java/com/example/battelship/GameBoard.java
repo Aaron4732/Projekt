@@ -4,13 +4,13 @@ import java.util.Arrays;
 import static com.example.battelship.Ships.generateShipCoordinates;
 
 public class GameBoard {
-    public static char[][] createGameBoard(int gameBoardLength, char water, char ship, int shipNumber) {
+    public static char[][] createGameBoard(int gameBoardLength, char water, char ship, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5) {
         char[][] gameBoard = new char[gameBoardLength][gameBoardLength];
         for (char[] row : gameBoard) {
             Arrays.fill(row, water);
         }
 
-        Placer placer = new Placer(gameBoard, water, ship);
+        Placer placer = new Placer(gameBoard, water, ship, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5);
         placer.placeShipsTerminal();
 
         return placer.returnGameBord();
