@@ -9,7 +9,11 @@ public class GameBoard {
         for (char[] row : gameBoard) {
             Arrays.fill(row, water);
         }
-        return placeShips(gameBoard, shipNumber, water, ship);
+
+        Placer placer = new Placer(gameBoard, water, ship);
+        placer.placeShipsTerminal();
+
+        return placer.returnGameBord();
     }
 
     public static void printGameBoard(char[][] gameBoard, char water, char ship)
@@ -39,17 +43,7 @@ public class GameBoard {
         }
     }
 
-    public static char[][] placeShips(char[][] gameBoard, int shipNumber, char water, char ship) {
-        int placedShips = 0;
-        int gameBoardLength = gameBoard.length;
-        while (placedShips < shipNumber) {
-            int[] location = generateShipCoordinates(gameBoardLength);
-            char possiblePlacement = gameBoard[location[0]][location[1]];
-            if (possiblePlacement == water) {
-                gameBoard[location[0]][location[1]] = ship;
-                placedShips++;
-            }
-        }
+    public static char[][] placeShips(char[][] gameBoard, char water, char ship) {
         return gameBoard;
     }
 
