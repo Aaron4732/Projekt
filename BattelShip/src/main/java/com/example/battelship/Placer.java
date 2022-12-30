@@ -80,6 +80,7 @@ public class Placer {
         };
     }
 
+
     private void reduceShip(int shipSize) {
         switch (shipSize) {
             case 2 -> shipsWhitSize2--;
