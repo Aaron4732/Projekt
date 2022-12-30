@@ -38,6 +38,10 @@ public class Placer {
     public void placeShipsTerminal() {
         Scanner scanner = new Scanner(System.in);
 
+        setAllShipsTo0();
+
+        setShipsWhitSize2(1);
+
         for (int i = 0; i < shipsTotal; i++) {
             System.out.println("Available ships: \nLenght 2: " + shipsWhitSize2 + "\nLenght 3: " + shipsWhitSize3 + "\nLenght 4: " + shipsWhitSize4 + "\nLenght 5: " + shipsWhitSize5);
 

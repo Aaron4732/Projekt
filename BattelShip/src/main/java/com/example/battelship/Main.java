@@ -47,7 +47,7 @@ public class Main {
         } else if (target == water)
         {
             message = "Miss!";
-            target = water;
+            gameBoard[row][col] = water;
         } else
         {
             message = "Already hit!";
