@@ -8,13 +8,19 @@ public class Main {
         char ship = 'S';
         char hit = 'X';
         char miss = 'O';
-        int shipNumber = 3;
 
-        char[][] gameBoard = GameBoard.createGameBoard(gameBoardLength, water, ship, shipNumber);
-        printGameBoard(gameBoard, water, ship);
+        int shipsWhitSize2 = 0;
+        int shipsWhitSize3 = 1;
+        int shipsWhitSize4 = 1;
+        int shipsWhitSize5 = 0;
+
+        int shipNumber = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
+
+        char[][] gameBoard = GameBoard.createGameBoard(gameBoardLength, water, ship,shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5 );
+        GameBoard.printGameBoard(gameBoard, water, ship);
         int undetectedShipNumber = shipNumber;
 
-        while (undetectedShipNumber < 0)
+        while (undetectedShipNumber > 0)
         {
             int[] guessCoordinates = UserInput.getUserCoordinates(gameBoardLength);
             char locationViewUpdate = evaluateGuessAndGetTheTarget(guessCoordinates, gameBoard, ship, water, hit, miss);
@@ -23,8 +29,9 @@ public class Main {
                 undetectedShipNumber--;
             }
             gameBoard = updateGameBoard(gameBoard, guessCoordinates, locationViewUpdate);
-            printGameBoard(GameBoard, water, ship)
+            GameBoard.printGameBoard(gameBoard, water, ship);
         }
+        System.out.println("You Won!");
     }
 
     private static char[][] updateGameBoard(char[][] gameBoard, int[] guessCoordinates, char locationViewUpdate) {
@@ -47,7 +54,7 @@ public class Main {
         } else if (target == water)
         {
             message = "Miss!";
-            target = water;
+            target = miss;
         } else
         {
             message = "Already hit!";
