@@ -8,7 +8,13 @@ public class Main {
         char ship = 'S';
         char hit = 'X';
         char miss = 'O';
-        int shipNumber = 3;
+
+        int shipsWhitSize2 = 1;
+        int shipsWhitSize3 = 0;
+        int shipsWhitSize4 = 0;
+        int shipsWhitSize5 = 0;
+
+        int shipNumber = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
 
         char[][] gameBoard = GameBoard.createGameBoard(gameBoardLength, water, ship, shipNumber);
         GameBoard.printGameBoard(gameBoard, water, ship);
