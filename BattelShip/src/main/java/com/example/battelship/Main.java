@@ -14,7 +14,7 @@ public class Main {
         GameBoard.printGameBoard(gameBoard, water, ship);
         int undetectedShipNumber = shipNumber;
 
-        while (undetectedShipNumber < 0)
+        while (undetectedShipNumber > 0)
         {
             int[] guessCoordinates = UserInput.getUserCoordinates(gameBoardLength);
             char locationViewUpdate = evaluateGuessAndGetTheTarget(guessCoordinates, gameBoard, ship, water, hit, miss);
