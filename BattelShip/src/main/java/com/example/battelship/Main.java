@@ -10,7 +10,7 @@ public class Main {
         char miss = 'O';
         int shipNumber = 3;
 
-        char[][] gameBoard = createGameBoard(gameBoardLength, water, ship, shipNumber);
+        char[][] gameBoard = GameBoard.createGameBoard(gameBoardLength, water, ship, shipNumber);
         printGameBoard(gameBoard, water, ship);
         int undetectedShipNumber = shipNumber;
 
