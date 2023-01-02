@@ -11,7 +11,7 @@ public class Main {
 
         int shipsWhitSize2 = 0;
         int shipsWhitSize3 = 1;
-        int shipsWhitSize4 = 1;
+        int shipsWhitSize4 = 0;
         int shipsWhitSize5 = 0;
 
 

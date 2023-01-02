@@ -163,6 +163,6 @@ public class GameBoard {
     }
 
     public boolean gameIsOver() {
-        return (shipNumber <= 0);
+        return (undetectedShipNumber <= 0);
     }
 }
