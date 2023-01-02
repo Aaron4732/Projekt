@@ -11,7 +11,7 @@ public class Placer {
 
     int shipsHitPoints;
 
-    char[][] gameBord;
+    GameBoard gameBord;
 
     int gameBordLenght;
     int gameBordBright;
@@ -27,14 +27,14 @@ public class Placer {
     int shipSice;
     int shipTyp = 0;
 
-    public Placer(char[][] gameBord, char water, char ship, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5) {
+    public Placer(GameBoard gameBord, char water, char ship, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5) {
         //, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5
         this.gameBord = gameBord;
         this.water = water;
         this.ship = ship;
 
-        gameBordLenght = gameBord.length;
-        gameBordBright = gameBord.length;
+        gameBordLenght = gameBord.getGameBoardLength();
+        gameBordBright = gameBord.getGameBoardLength();
         this.shipsWhitSize2 = shipsWhitSize2;
         this.shipsWhitSize3 = shipsWhitSize3;
         this.shipsWhitSize4 = shipsWhitSize4;
@@ -62,7 +62,7 @@ public class Placer {
 
             for (;;) {
                 //grid.printGridShips();
-                GameBoard.printGameBoardWhitShips(gameBord, water, ship);
+                gameBord.printGameBoardWhitShips();
                 System.out.println("Place select the start Position");
 
                 System.out.print("X:");
@@ -83,7 +83,7 @@ public class Placer {
             }
 
             placeShip();
-            GameBoard.printGameBoardWhitShips(gameBord, water, ship);
+            gameBord.printGameBoardWhitShips();
         }
     }
 
@@ -134,7 +134,7 @@ public class Placer {
 
                 //return false when a field is not free
                 //grid.getPositionShipsGrid(startCoordinatX + k,startCoordinatY +i)
-                if (gameBord[startCoordinatY + i][startCoordinatX + k] == ship) {
+                if (gameBord.getCharOfCoordinate(startCoordinatX + k,startCoordinatY +i) == ship) {
                     return false;
                 }
             }
@@ -148,14 +148,10 @@ public class Placer {
 
         for (int i = 0; i < shipSice; i++) {
             //grid.changeFieldOnShipsGrid(startCoordinatX + stepX * i, startCoordinatY + stepY * i, placedShips);
-            gameBord[startCoordinatY + stepY * i][startCoordinatX + stepX * i] = ship;
+            gameBord.setCharOnCoordinate(startCoordinatX + stepX * i, startCoordinatY + stepY * i, ship);
         }
 
         placedShips++;
-    }
-
-    public char[][] returnGameBord() {
-        return gameBord;
     }
 
     public void setAllShipsTo0() {
