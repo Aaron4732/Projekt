@@ -47,8 +47,6 @@ public class GUI extends Application {
 
     Scene scene;
 
-
-
     public void start(Stage stage) throws Exception {
 
             this.stage = stage;
@@ -61,6 +59,15 @@ public class GUI extends Application {
 
     }
 
+    @FXML
+    public void startOnePlayerMode(ActionEvent actionEvent) {
+    }
+    @FXML
+    public void startTwoPlayerMode(ActionEvent actionEvent) {
+    }
+    @FXML
+    public void exitTheGame(ActionEvent actionEvent) {
+    }
     @FXML
     public void Pong(ActionEvent actionEvent) {
         //stage.setTitle("PONG");
@@ -121,7 +128,7 @@ public class GUI extends Application {
         if ((
                 ballPosX == playerOnePosX + playerWidth && ballPosY > playerOnePosY && ballPosY < playerOnePosY + ballRadios + playerHeight) || (
                 ballPosX + ballRadios == playerTwoPosX && ballPosY > playerTwoPosY && ballPosY < playerTwoPosY + ballRadios + playerHeight
-                )) ballSpeedX *= -1;
+        )) ballSpeedX *= -1;
 
 
         if (ballPosX < playerOnePosX - playerWidth) {
@@ -138,13 +145,5 @@ public class GUI extends Application {
 
         gc.fillRect(playerOnePosX, playerOnePosY, playerWidth, playerHeight);
         gc.fillRect(playerTwoPosX, playerTwoPosY, playerWidth, playerHeight);
-    }
-
-
-    @FXML
-    public void startTwoPlayerMode(ActionEvent actionEvent) {
-    }
-    @FXML
-    public void exitTheGame(ActionEvent actionEvent) {
     }
 }

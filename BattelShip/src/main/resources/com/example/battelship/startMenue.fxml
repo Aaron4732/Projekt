@@ -12,8 +12,9 @@
             <Font name="Arial Bold" size="60.0" />
          </font>
       </Label>
-      <Button layoutX="275.0" layoutY="175.0" mnemonicParsing="false" text="Play Pong" onAction="#Pong"/>
-      <Button layoutX="276.0" layoutY="206.0" mnemonicParsing="false" text="TwoPlayer" onAction="#startTwoPlayerMode"/>
-      <Button layoutX="291.0" layoutY="278.0" mnemonicParsing="false" text="EXIT" onAction="#exitTheGame"/>
+      <Button layoutX="275.0" layoutY="175.0" mnemonicParsing="false" onAction="#startOnePlayerMode" text="OnePlayer" />
+      <Button layoutX="276.0" layoutY="212.0" mnemonicParsing="false" onAction="#startTwoPlayerMode" text="TwoPlayer" />
+      <Button layoutX="291.0" layoutY="278.0" mnemonicParsing="false" onAction="#exitTheGame" text="EXIT" />
+      <Button layoutX="517.0" layoutY="361.0" mnemonicParsing="false" onAction="#Pong" text="Play Pong" />
    </children>
 </AnchorPane>
