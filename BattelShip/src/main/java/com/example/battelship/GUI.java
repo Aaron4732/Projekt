@@ -35,11 +35,6 @@ public class GUI extends Application {
     int scorePlayer1 = 0;
     int scorePlayer2 = 0;
     boolean gameStarted;
-    boolean inStartMenue = true;
-
-    boolean onePlayerMode = false;
-
-    boolean twoPlayerMode = false;
     int playerOnePosX = 0;
     int playerTwoPosX = width - playerWidth;
 
