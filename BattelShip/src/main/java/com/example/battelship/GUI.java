@@ -35,27 +35,48 @@ public class GUI extends Application {
     int scorePlayer1 = 0;
     int scorePlayer2 = 0;
     boolean gameStarted;
-    int playerOnePosX = 0;
+    double playerOnePosX;
     int playerTwoPosX = width - playerWidth;
 
     Stage stage;
-
     Scene scene;
+
+    //Canvas canvas;
+
+    //GraphicsContext gc;
 
     public void start(Stage stage) throws Exception {
 
-            this.stage = stage;
+        this.stage = stage;
 
-            FXMLLoader fxmlLoader = new FXMLLoader(TestApplication.class.getResource("startMenue.fxml"));
-            scene = new Scene(fxmlLoader.load(), width, hight);
-            this.stage.setTitle("Hello!");
-            this.stage.setScene(scene);
-            this.stage.show();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(TestApplication.class.getResource("startMenue.fxml"));
+        scene = new Scene(fxmlLoader.load(), width, hight);
+        this.stage.setTitle("Hello!");
+        this.stage.setScene(scene);
+        this.stage.show();
 
     }
 
     @FXML
     public void startOnePlayerMode(ActionEvent actionEvent) {
+        Canvas canvas = new Canvas(width, hight);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        Timeline tl = new Timeline(new KeyFrame(Duration.millis(1), e -> singelPLayerMode(gc)));
+        tl.setCycleCount(Timeline.INDEFINITE);
+
+        //mouse Control
+        canvas.setOnMouseMoved(e -> playerOnePosX = e.getX());
+        canvas.setOnMouseMoved(e -> playerOnePosY = e.getY());
+        canvas.setOnMouseClicked(e -> gameStarted = true);
+
+        stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(new StackPane(canvas));
+        stage.setScene(scene);
+        stage.show();
+        tl.play();
     }
     @FXML
     public void startTwoPlayerMode(ActionEvent actionEvent) {
@@ -63,12 +84,30 @@ public class GUI extends Application {
     @FXML
     public void exitTheGame(ActionEvent actionEvent) {
     }
+
+    public void singelPLayerMode(GraphicsContext gc) {
+        int fieldCordinatX = 0;
+        int fieldCordinatY = 0;
+
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0,width,hight);
+
+        //set text color
+        gc.setFill(Color.WHITE);
+        gc.setFont(Font.font(25));
+
+        for (int i = 0; i < 8; i++) {
+            gc.fillRect(playerOnePosX, playerOnePosY, playerWidth, playerHeight);
+
+        }
+    }
     @FXML
     public void Pong(ActionEvent actionEvent) {
         //stage.setTitle("PONG");
         Canvas canvas = new Canvas(width, hight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Timeline tl = new Timeline(new KeyFrame(Duration.millis(10), e -> run(gc)));
+
+        Timeline tl = new Timeline(new KeyFrame(Duration.millis(1), e -> run(gc)));
         tl.setCycleCount(Timeline.INDEFINITE);
 
         //mouse Control
