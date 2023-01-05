@@ -38,16 +38,26 @@ public class GUI extends Application {
     double playerOnePosX;
     int playerTwoPosX = width - playerWidth;
 
-    int fieldHeight = 20;
-    int fieldWidth = 20;
+    int fieldHeight = 40;
+    int fieldWidth = fieldHeight;
 
     int gameBoardLength = 8;
 
-    int rasterStartX = 100;
-    int rasterStartY = 100;
+    int rasterStartX = (width - fieldWidth * gameBoardLength) /2;
+    int rasterStartY = (hight - fieldHeight * gameBoardLength) /2;
 
     Stage stage;
     Scene scene;
+
+    char water = '-';
+    char ship = 'S';
+    char hit = 'X';
+    char miss = 'O';
+
+    int shipsWhitSize2 = 0;
+    int shipsWhitSize3 = 1;
+    int shipsWhitSize4 = 0;
+    int shipsWhitSize5 = 0;
 
     public void start(Stage stage) throws Exception {
 
@@ -63,6 +73,8 @@ public class GUI extends Application {
 
     @FXML
     public void startOnePlayerMode(ActionEvent actionEvent) {
+        GameBoard gameBoard1 = new GameBoard (gameBoardLength, water, ship, hit, miss, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5 );
+
         Canvas canvas = new Canvas(width, hight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -99,14 +111,20 @@ public class GUI extends Application {
         gc.setFill(Color.CORNFLOWERBLUE);
         gc.setFont(Font.font(25));
 
-        for (int i = 0; i < gameBoardLength; i++) {
-            for (int k = 0; k < gameBoardLength; k++) {
-                gc.fillRect(fieldCordinatX, fieldCordinatY, fieldWidth, fieldHeight);
-                fieldCordinatX += fieldWidth + 1;
+
+
+        if (true) {
+            for (int i = 0; i < gameBoardLength; i++) {
+                for (int k = 0; k < gameBoardLength; k++) {
+                    gc.fillRect(fieldCordinatX, fieldCordinatY, fieldWidth, fieldHeight);
+                    fieldCordinatX += fieldWidth + 1;
+                }
+                fieldCordinatY += fieldHeight + 1;
+                fieldCordinatX = rasterStartX;
             }
-            fieldCordinatY += fieldHeight +1;
-            fieldCordinatX = rasterStartX;
+
         }
+
     }
     @FXML
     public void Pong(ActionEvent actionEvent) {
