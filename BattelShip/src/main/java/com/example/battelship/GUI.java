@@ -38,18 +38,20 @@ public class GUI extends Application {
     double playerOnePosX;
     int playerTwoPosX = width - playerWidth;
 
+    int fieldHeight = 20;
+    int fieldWidth = 20;
+
+    int gameBoardLength = 8;
+
+    int rasterStartX = 100;
+    int rasterStartY = 100;
+
     Stage stage;
     Scene scene;
-
-    //Canvas canvas;
-
-    //GraphicsContext gc;
 
     public void start(Stage stage) throws Exception {
 
         this.stage = stage;
-
-
 
         FXMLLoader fxmlLoader = new FXMLLoader(TestApplication.class.getResource("startMenue.fxml"));
         scene = new Scene(fxmlLoader.load(), width, hight);
@@ -64,7 +66,7 @@ public class GUI extends Application {
         Canvas canvas = new Canvas(width, hight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Timeline tl = new Timeline(new KeyFrame(Duration.millis(1), e -> singelPLayerMode(gc)));
+        Timeline tl = new Timeline(new KeyFrame(Duration.millis(10), e -> singelPLayerMode(gc)));
         tl.setCycleCount(Timeline.INDEFINITE);
 
         //mouse Control
@@ -86,19 +88,24 @@ public class GUI extends Application {
     }
 
     public void singelPLayerMode(GraphicsContext gc) {
-        int fieldCordinatX = 0;
-        int fieldCordinatY = 0;
+        int fieldCordinatX = rasterStartX;
+        int fieldCordinatY = rasterStartY;
 
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,width,hight);
+
 
         //set text color
         gc.setFill(Color.WHITE);
         gc.setFont(Font.font(25));
 
-        for (int i = 0; i < 8; i++) {
-            gc.fillRect(playerOnePosX, playerOnePosY, playerWidth, playerHeight);
-
+        for (int i = 0; i < gameBoardLength; i++) {
+            for (int k = 0; k < gameBoardLength; k++) {
+                gc.fillRect(fieldCordinatX, fieldCordinatY, fieldWidth, fieldHeight);
+                fieldCordinatX += fieldWidth + 1;
+            }
+            fieldCordinatY += fieldHeight +1;
+            fieldCordinatX = rasterStartX;
         }
     }
     @FXML
@@ -107,7 +114,7 @@ public class GUI extends Application {
         Canvas canvas = new Canvas(width, hight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Timeline tl = new Timeline(new KeyFrame(Duration.millis(1), e -> run(gc)));
+        Timeline tl = new Timeline(new KeyFrame(Duration.millis(10), e -> run(gc)));
         tl.setCycleCount(Timeline.INDEFINITE);
 
         //mouse Control
