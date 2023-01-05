@@ -7,7 +7,7 @@ public class GameBoard {
 
     char[][] gameBoard;
 
-    int gameBoardLength;
+    int gameBoardLength = 8;
     char water;
     char ship;
 
