@@ -96,7 +96,7 @@ public class GUI extends Application {
 
 
         //set text color
-        gc.setFill(Color.WHITE);
+        gc.setFill(Color.CORNFLOWERBLUE);
         gc.setFont(Font.font(25));
 
         for (int i = 0; i < gameBoardLength; i++) {
