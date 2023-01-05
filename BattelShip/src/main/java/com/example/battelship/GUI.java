@@ -28,7 +28,7 @@ public class GUI extends Application {
     static double ballRadios = 15;
     static int ballSpeedX = 1;
     static int ballSpeedY = 1;
-    double playerOnePosY = hight /2;
+    double playerOnePosY = 0;
     double playerTwoPosY = hight /2;
     double ballPosX = width /2;
     double ballPosY = width /2;
@@ -59,6 +59,8 @@ public class GUI extends Application {
     int shipsWhitSize4 = 0;
     int shipsWhitSize5 = 0;
 
+    GameBoard gameBoard1;
+
     public void start(Stage stage) throws Exception {
 
         this.stage = stage;
@@ -73,7 +75,7 @@ public class GUI extends Application {
 
     @FXML
     public void startOnePlayerMode(ActionEvent actionEvent) {
-        GameBoard gameBoard1 = new GameBoard (gameBoardLength, water, ship, hit, miss, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5 );
+        gameBoard1 = new GameBoard (gameBoardLength, water, ship, hit, miss, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5 );
 
         Canvas canvas = new Canvas(width, hight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -82,8 +84,11 @@ public class GUI extends Application {
         tl.setCycleCount(Timeline.INDEFINITE);
 
         //mouse Control
-        canvas.setOnMouseMoved(e -> playerOnePosX = e.getX());
-        canvas.setOnMouseMoved(e -> playerOnePosY = e.getY());
+
+        canvas.setOnMouseMoved(w -> {
+            playerOnePosX = w.getX();
+            playerOnePosY = w.getY();
+        });
         canvas.setOnMouseClicked(e -> gameStarted = true);
 
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -103,19 +108,27 @@ public class GUI extends Application {
         int fieldCordinatX = rasterStartX;
         int fieldCordinatY = rasterStartY;
 
+        int mouseFieldX = GUIMethots.convertCordinatsToField((int) playerOnePosX - rasterStartX, fieldHeight, 1);
+        int mouseFieldY = GUIMethots.convertCordinatsToField((int) playerOnePosY - rasterStartY, fieldWidth, 1);
+
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,width,hight);
-
-
-        //set text color
-        gc.setFill(Color.CORNFLOWERBLUE);
         gc.setFont(Font.font(25));
 
+        gc.setFill(Color.CORNFLOWERBLUE);
 
 
         if (true) {
             for (int i = 0; i < gameBoardLength; i++) {
                 for (int k = 0; k < gameBoardLength; k++) {
+
+                    if (gameBoard1.getCharOfCoordinate(k,i) == ship) {
+                        gc.setFill(Color.GRAY);
+                    }
+                    else {
+                        gc.setFill(Color.CORNFLOWERBLUE);
+                    }
+
                     gc.fillRect(fieldCordinatX, fieldCordinatY, fieldWidth, fieldHeight);
                     fieldCordinatX += fieldWidth + 1;
                 }
@@ -124,6 +137,8 @@ public class GUI extends Application {
             }
 
         }
+
+        System.out.println("PostionX: " + mouseFieldX + "PositionY: " + mouseFieldY);
 
     }
     @FXML

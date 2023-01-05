@@ -46,6 +46,9 @@ public class GameBoard {
             Arrays.fill(row, water);
         }
 
+    }
+
+    public void placeShips() {
         Placer placer = new Placer(this, water, ship, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5);
         placer.placeShipsTerminal();
     }
