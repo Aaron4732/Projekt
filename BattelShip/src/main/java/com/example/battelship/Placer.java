@@ -147,13 +147,6 @@ public class Placer {
         placedShips++;
     }
 
-    public void setAllShipsTo0() {
-        setShipSize2(0);
-        setShipSize3(0);
-        setShipSize4(0);
-        setShipSize5(0);
-    }
-
 
     // collection of methods for future expansions of the program / used methods in code instead of variables
     public void setShipSize2(int shipSize2) {
