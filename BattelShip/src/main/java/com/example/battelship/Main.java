@@ -11,13 +11,13 @@ public class Main {
         char miss = 'O';
 
         //Set the number of ship availability ships
-        int shipsWhitSize2 = 0;
-        int shipsWhitSize3 = 1;
-        int shipsWhitSize4 = 0;
-        int shipsWhitSize5 = 0;
+        int shipsSize2 = 0;
+        int shipsSize3 = 1;
+        int shipsSize4 = 0;
+        int shipsSize5 = 0;
 
         //Create the gamebord for player1
-        GameBoard gameBoard1 = new GameBoard (gameBoardLength, water, ship, hit, miss, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5 );
+        GameBoard gameBoard1 = new GameBoard (gameBoardLength, water, ship, hit, miss, shipsSize2, shipsSize3, shipsSize4, shipsSize5 );
         gameBoard1.printGameBoard();
 
         //play the game

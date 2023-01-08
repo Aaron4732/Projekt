@@ -14,10 +14,10 @@ public class GameBoard {
     char miss;
 
     char hit;
-    int shipsWhitSize2;
-    int shipsWhitSize3;
-    int shipsWhitSize4;
-    int shipsWhitSize5;
+    int shipsSize2;
+    int shipsSize3;
+    int shipsSize4;
+    int shipsSize5;
     int shipNumber;
 
     int undetectedShipNumber;
@@ -33,10 +33,10 @@ public class GameBoard {
         this.ship = ship;
         this.hit = hit;
         this.miss = miss;
-        this.shipsWhitSize2 = shipsWhitSize2;
-        this.shipsWhitSize3 = shipsWhitSize3;
-        this.shipsWhitSize4 = shipsWhitSize4;
-        this.shipsWhitSize5 = shipsWhitSize5;
+        this.shipsSize2 = shipsWhitSize2;
+        this.shipsSize3 = shipsWhitSize3;
+        this.shipsSize4 = shipsWhitSize4;
+        this.shipsSize5 = shipsWhitSize5;
 
         this.shipNumber= shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
         this.undetectedShipNumber = shipNumber;
