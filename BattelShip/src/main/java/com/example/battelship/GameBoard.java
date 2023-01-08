@@ -14,10 +14,10 @@ public class GameBoard {
     char miss;
 
     char hit;
-    int shipsSize2;
-    int shipsSize3;
-    int shipsSize4;
-    int shipsSize5;
+    int shipsWhitSize2;
+    int shipsWhitSize3;
+    int shipsWhitSize4;
+    int shipsWhitSize5;
     int shipNumber;
 
     int undetectedShipNumber;
@@ -27,48 +27,59 @@ public class GameBoard {
     char locationViewUpdate;
 
     public GameBoard(int gameBoardLength, char water, char ship, char hit, char miss, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5) {
-
+    // Constructor to initialize different objects of the battleship game.
         this.gameBoardLength = gameBoardLength;
         this.water = water;
         this.ship = ship;
         this.hit = hit;
         this.miss = miss;
-        this.shipsSize2 = shipsWhitSize2;
-        this.shipsSize3 = shipsWhitSize3;
-        this.shipsSize4 = shipsWhitSize4;
-        this.shipsSize5 = shipsWhitSize5;
+        this.shipsWhitSize2 = shipsWhitSize2;
+        this.shipsWhitSize3 = shipsWhitSize3;
+        this.shipsWhitSize4 = shipsWhitSize4;
+        this.shipsWhitSize5 = shipsWhitSize5;
 
         this.shipNumber= shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
+        //Number of max. possible ship hits (needed to win).
         this.undetectedShipNumber = shipNumber;
 
         gameBoard = new char[gameBoardLength][gameBoardLength];
+        //creating a square gameboard with gameBoardLength as side length.
+
         for (char[] row : gameBoard) {
             Arrays.fill(row, water);
         }
+        //Filling gameboard with water
 
         Placer placer = new Placer(this, water, ship, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5);
         placer.placeShipsTerminal();
     }
 
     public void printGameBoard()
+    //Method to create console layout of gameboard
     {
         int gameBoardLength = gameBoard.length;
+        //creating variable for gameboard.length for performance.
         System.out.print("  ");
 
         for (int i = 0; i < gameBoardLength; i++)
         {
             System.out.print(i + 1 + " ");
+            //creating column coordinates
         }
         System.out.println();
         for(int row = 0; row < gameBoardLength; row++)
         {
             System.out.print(row + 1 + " ");
+            //creating row coordinates
+
             for (int col = 0; col < gameBoardLength; col++)
             {
                 char position = gameBoard[row][col];
                 if(position == ship)
                 {
                     System.out.print(water + " ");
+                    //Print undetected ships as water
+
                 } else {
                     System.out.print(position + " ");
                 }
@@ -78,6 +89,7 @@ public class GameBoard {
     }
 
     public void printGameBoardWithShips()
+    // Method for printing gameboard with ships for placing the ships. Like the 'printGameBoard' method, but with ships visible.
     {
         int gameBoardLength = gameBoard.length;
         System.out.print("  ");
@@ -99,6 +111,7 @@ public class GameBoard {
             }
         }
 
+    /* Method is currently not in use. Would be needed if 'computer' player needs to be installed.
     public void placeShipsRandom() {
         int placedShips = 0;
         int gameBoardLength = gameBoard.length;
@@ -111,18 +124,22 @@ public class GameBoard {
             }
         }
     }
+    */
 
     private void updateGameBoard() {
+        //Method to change User guesses for row and col values into gameBoard coordinates.
         int row = guessCoordinates[0];
         int col = guessCoordinates[1];
         gameBoard[row][col] = locationViewUpdate;
     }
 
-    private void checkCoordinatesOnGameBord() {
+    private void checkCoordinatesOnGameBoard() {
+        //Method to check if User guess (input coordinates) are a hit or a miss.
         String message;
         int row = guessCoordinates[0];
         int col = guessCoordinates[1];
         char target = gameBoard[row][col];
+        //Both guess coordinates are combined for a specific target on gameboard.
 
         if (target == ship)
         {
@@ -142,10 +159,12 @@ public class GameBoard {
     }
     public void userTarget() {
         guessCoordinates = UserInput.getUserCoordinates(gameBoardLength);
-        checkCoordinatesOnGameBord();
+        //Getting the User input coordinates.
+        checkCoordinatesOnGameBoard();
         if (locationViewUpdate == hit)
         {
             undetectedShipNumber--;
+            //If locationViewUpdate (target) is a hit, ship number will be reduced by 1.
         }
         updateGameBoard();
     }
@@ -163,6 +182,7 @@ public class GameBoard {
     }
 
     public boolean gameIsOver() {
+        //method for checking of all ships have been hit and game is over.
         return (undetectedShipNumber <= 0);
     }
 }
