@@ -77,7 +77,7 @@ public class GameBoard {
         }
     }
 
-    public void printGameBoardWhitShips()
+    public void printGameBoardWithShips()
     {
         int gameBoardLength = gameBoard.length;
         System.out.print("  ");
