@@ -1,7 +1,6 @@
 package com.example.battelship;
 
 import java.util.Arrays;
-import static com.example.battelship.Ships.generateShipCoordinates;
 
 public class GameBoard {
 
@@ -14,10 +13,10 @@ public class GameBoard {
     char miss;
 
     char hit;
-    int shipsWhitSize2;
-    int shipsWhitSize3;
-    int shipsWhitSize4;
-    int shipsWhitSize5;
+    int shipsSize2;
+    int shipsSize3;
+    int shipsSize4;
+    int shipsSize5;
     int shipNumber;
 
     int undetectedShipNumber;
@@ -26,19 +25,19 @@ public class GameBoard {
 
     char locationViewUpdate;
 
-    public GameBoard(int gameBoardLength, char water, char ship, char hit, char miss, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5) {
+    public GameBoard(int gameBoardLength, char water, char ship, char hit, char miss, int shipsSize2, int shipsSize3, int shipsSize4, int shipsSize5) {
     // Constructor to initialize different objects of the battleship game.
         this.gameBoardLength = gameBoardLength;
         this.water = water;
         this.ship = ship;
         this.hit = hit;
         this.miss = miss;
-        this.shipsWhitSize2 = shipsWhitSize2;
-        this.shipsWhitSize3 = shipsWhitSize3;
-        this.shipsWhitSize4 = shipsWhitSize4;
-        this.shipsWhitSize5 = shipsWhitSize5;
+        this.shipsSize2 = shipsSize2;
+        this.shipsSize3 = shipsSize3;
+        this.shipsSize4 = shipsSize4;
+        this.shipsSize5 = shipsSize5;
 
-        this.shipNumber= shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
+        this.shipNumber= shipsSize2 *2  + shipsSize3 *3 + shipsSize4 *4 + shipsSize5 *5;
         //Number of max. possible ship hits (needed to win).
         this.undetectedShipNumber = shipNumber;
 
@@ -50,7 +49,7 @@ public class GameBoard {
         }
         //Filling gameboard with water
 
-        Placer placer = new Placer(this, water, ship, shipsWhitSize2, shipsWhitSize3, shipsWhitSize4, shipsWhitSize5);
+        Placer placer = new Placer(this, water, ship, shipsSize2, shipsSize3, shipsSize4, shipsSize5);
         placer.placeShipsTerminal();
     }
 
