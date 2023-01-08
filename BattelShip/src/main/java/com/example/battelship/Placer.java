@@ -3,138 +3,135 @@ package com.example.battelship;
 import java.util.Scanner;
 
 public class Placer {
-    int shipsWhitSize2;
-    int shipsWhitSize3;
-    int shipsWhitSize4;
-    int shipsWhitSize5;
+    int shipSize2;
+    int shipSize3;
+    int shipSize4;
+    int shipSize5;
     int shipsTotal;
 
-    int shipsHitPoints;
+    int HitPoints;
 
     GameBoard gameBord;
 
-    int gameBordLenght;
-    int gameBordBright;
-
+    int gameBordLength;
+    int gameBordWidth;
+    
     char water;
     char ship;
 
     int placedShips = 0;
-    int startCoordinatX;
-    int startCoordinatY;
-    int stepX = 0;
-    int stepY = 0;
-    int shipSice;
-    int shipTyp = 0;
+    int startCoordinateX;
+    int startCoordinateY;
+    int horizontal = 0;
+    int vertical = 0;
+    int shipSize;
 
-    public Placer(GameBoard gameBord, char water, char ship, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5) {
-        //, int shipsWhitSize2, int shipsWhitSize3, int shipsWhitSize4, int shipsWhitSize5
+    //Constructor for initialisation of necessary variables and objects
+    public Placer(GameBoard gameBord, char water, char ship, int shipSize2, int shipSize3, int shipSize4, int shipSize5) {
         this.gameBord = gameBord;
         this.water = water;
         this.ship = ship;
 
-        gameBordLenght = gameBord.getGameBoardLength();
-        gameBordBright = gameBord.getGameBoardLength();
-        this.shipsWhitSize2 = shipsWhitSize2;
-        this.shipsWhitSize3 = shipsWhitSize3;
-        this.shipsWhitSize4 = shipsWhitSize4;
-        this.shipsWhitSize5 = shipsWhitSize5;
+        gameBordLength = gameBord.getGameBoardLength();
+        gameBordWidth = gameBord.getGameBoardLength();
+        this.shipSize2 = shipSize2;
+        this.shipSize3 = shipSize3;
+        this.shipSize4 = shipSize4;
+        this.shipSize5 = shipSize5;
 
-        shipsTotal = shipsWhitSize2 + shipsWhitSize3 + shipsWhitSize4 + shipsWhitSize5;
-        shipsHitPoints = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
-    }
+        shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
+        }
 
+    //initial request for player choice about ship size, position and orientation
     public void placeShipsTerminal() {
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 0; i < shipsTotal; i++) {
-            System.out.println("Available ships: \nLenght 2: " + shipsWhitSize2 + "\nLenght 3: " + shipsWhitSize3 + "\nLenght 4: " + shipsWhitSize4 + "\nLenght 5: " + shipsWhitSize5);
+            System.out.println("Available ships: \nLength 2: " + shipSize2 + "\nLength 3: " + shipSize3 + "\nLength 4: " + shipSize4 + "\nLength 5: " + shipSize5);
 
             for (;;) {
                 System.out.println("Pleace selct a available ship");
-                setShipSice(scanner.nextInt());
+                setShipSize(scanner.nextInt());         //directly inserting user input into shipSize
 
-                if (shipAvailable(shipSice)) break;
+                if (shipAvailable(shipSize)) break;     //determining ship availability through method
 
                 System.out.println("Ship is not available!");
             }
-            reduceShip(shipSice);
+            reduceShip(shipSize);
 
             for (;;) {
-                //grid.printGridShips();
-                gameBord.printGameBoardWhitShips();
+                gameBord.printGameBoardWithShips();
                 System.out.println("Place select the start Position");
 
                 System.out.print("X:");
-                setStartCoordinatX(scanner.nextInt() -1);
+                setStartCoordinateX(scanner.nextInt() -1);
 
                 System.out.print("Y:");
-                setStartCoordinatY(scanner.nextInt() -1);
+                setStartCoordinateY(scanner.nextInt() -1);
 
-                System.out.print("Select the direktion Down[D], Right[R]");
+                System.out.print("Select the direction Down[D], Right[R]");
                 String direction = scanner.next();
 
                 switch (direction) {
-                    case "D" -> setStepY(1);
-                    case "R" -> setStepX(1);
+                    case "D" -> setVertical(1);
+                    case "R" -> setHorizontal(1);
                 }
 
-                if (positionFreeForShip()) break;
+                if (positionFreeForShip()) break;       //method returns boolean, so simple statement
             }
 
             placeShip();
-            gameBord.printGameBoardWhitShips();
+            gameBord.printGameBoardWithShips();
         }
     }
 
     private boolean shipAvailable(int shipSize) {
         return switch (shipSize) {
-            case 2 -> (shipsWhitSize2 > 0);
-            case 3 -> (shipsWhitSize3 > 0);
-            case 4 -> (shipsWhitSize4 > 0);
-            case 5 -> (shipsWhitSize5 > 0);
+            case 2 -> (shipSize2 > 0);
+            case 3 -> (shipSize3 > 0);
+            case 4 -> (shipSize4 > 0);
+            case 5 -> (shipSize5 > 0);
             default -> false;
         };
     }
 
     private void reduceShip(int shipSize) {
         switch (shipSize) {
-            case 2 -> shipsWhitSize2--;
-            case 3 -> shipsWhitSize3--;
-            case 4 -> shipsWhitSize4--;
-            case 5 -> shipsWhitSize5--;
+            case 2 -> shipSize2--;
+            case 3 -> shipSize3--;
+            case 4 -> shipSize4--;
+            case 5 -> shipSize5--;
         }
     }
 
     private boolean positionFreeForShip() {
-        //Check if the ship is in the grid
+        //checking all variations that are outside of gameBoard
         if (
-                startCoordinatX < 0 ||
-                        startCoordinatX >= gameBordLenght ||
-                        startCoordinatY < 0 ||
-                        startCoordinatY >= gameBordLenght ||
-                        startCoordinatX + shipSice * stepX < 0 ||
-                        startCoordinatX + shipSice * stepX > gameBordBright ||
-                        startCoordinatY + shipSice * stepY < 0 ||
-                        startCoordinatY + shipSice * stepY > gameBordBright
+                startCoordinateX < 0 ||
+                        startCoordinateX >= gameBordLength ||
+                        startCoordinateY < 0 ||
+                        startCoordinateY >= gameBordLength ||
+                        startCoordinateX + shipSize * horizontal < 0 ||
+                        startCoordinateX + shipSize * horizontal > gameBordWidth ||
+                        startCoordinateY + shipSize * vertical < 0 ||
+                        startCoordinateY + shipSize * vertical > gameBordWidth
         ) {
             return false;
         }
 
-        //Check all field which have to be free
-        for (int i = -1; i < (shipSice-1)* stepY +3-1; i++) {
+        //Check all fields which have to be free
+        for (int i = -1; i < (shipSize -1)* vertical +3-1; i++) {
 
-            //When the field is outside the grid, it get ignored
-            if (startCoordinatY +i < 0 || startCoordinatY +i >= gameBordLenght) continue;
+            //When the field is outside the grid, it gets ignored
+            if (startCoordinateY +i < 0 || startCoordinateY +i >= gameBordLength) continue;
 
-            for (int k = -1; k < (shipSice-1)* stepX +3-1; k++) {
+            for (int k = -1; k < (shipSize -1)* horizontal +3-1; k++) {
 
-                //When the field is outside the grid, it get ignored
-                if (startCoordinatX +k < 0 || startCoordinatX +k >= gameBordBright) continue;
+                //When the field is outside the grid, it gets ignored
+                if (startCoordinateX +k < 0 || startCoordinateX +k >= gameBordWidth) continue;
 
                 //return false when a field is not free
-                //grid.getPositionShipsGrid(startCoordinatX + k,startCoordinatY +i)
-                if (gameBord.getCharOfCoordinate(startCoordinatX + k,startCoordinatY +i) == ship) {
+                if (gameBord.getCharOfCoordinate(startCoordinateX + k, startCoordinateY +i) == ship) {
                     return false;
                 }
             }
@@ -144,100 +141,61 @@ public class Placer {
     }
 
     private void placeShip() {
-        //grid.addShipToList(new Ship(shipSice, shipTyp, startCoordinatX, startCoordinatY, stepX, stepY));
-
-        for (int i = 0; i < shipSice; i++) {
-            //grid.changeFieldOnShipsGrid(startCoordinatX + stepX * i, startCoordinatY + stepY * i, placedShips);
-            gameBord.setCharOnCoordinate(startCoordinatX + stepX * i, startCoordinatY + stepY * i, ship);
+        for (int i = 0; i < shipSize; i++) {
+            gameBord.setCharOnCoordinate(startCoordinateX + horizontal * i, startCoordinateY + vertical * i, ship);  //hor/ver have own methods
         }
-
         placedShips++;
     }
 
-    public void setAllShipsTo0() {
-        setShipsWhitSize2(0);
-        setShipsWhitSize3(0);
-        setShipsWhitSize4(0);
-        setShipsWhitSize5(0);
+
+    // collection of methods for future expansions of the program / used methods in code instead of variables
+    public void setShipSize2(int shipSize2) {
+        this.shipSize2 = shipSize2;
+        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
+        int HitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
     }
 
-    public void setShipsWhitSize2(int shipsWhitSize2) {
-        this.shipsWhitSize2 = shipsWhitSize2;
-        shipsTotal = shipsWhitSize2 + shipsWhitSize3 + shipsWhitSize4 + shipsWhitSize5;
-        int shipsHitPoints = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
+    public void setShipSize3(int shipSize3) {
+        this.shipSize3 = shipSize3;
+        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
+        int shipsHitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
     }
 
-    public void setShipsWhitSize3(int shipsWhitSize3) {
-        this.shipsWhitSize3 = shipsWhitSize3;
-        shipsTotal = shipsWhitSize2 + shipsWhitSize3 + shipsWhitSize4 + shipsWhitSize5;
-        int shipsHitPoints = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
+    public void setShipSize4(int shipSize4) {
+        this.shipSize4 = shipSize4;
+        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
+        int shipsHitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
     }
 
-    public void setShipsWhitSize4(int shipsWhitSize4) {
-        this.shipsWhitSize4 = shipsWhitSize4;
-        shipsTotal = shipsWhitSize2 + shipsWhitSize3 + shipsWhitSize4 + shipsWhitSize5;
-        int shipsHitPoints = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
+    public void setShipSize5(int shipSize5) {
+        this.shipSize5 = shipSize5;
+        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
+        int shipsHitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
     }
 
-    public void setShipsWhitSize5(int shipsWhitSize5) {
-        this.shipsWhitSize5 = shipsWhitSize5;
-        shipsTotal = shipsWhitSize2 + shipsWhitSize3 + shipsWhitSize4 + shipsWhitSize5;
-        int shipsHitPoints = shipsWhitSize2 *2  + shipsWhitSize3 *3 + shipsWhitSize4 *4 + shipsWhitSize5 *5;
+    public void setHorizontal(int horizontal) {
+        this.horizontal = horizontal;
+        this.vertical = 0;
     }
 
-    public void setStepX(int stepX) {
-        this.stepX = stepX;
-        this.stepY = 0;
+    public void setVertical(int vertical) {
+        this.vertical = vertical;
+        this.horizontal = 0;
     }
 
-    public void setStepY(int stepY) {
-        this.stepY = stepY;
-        this.stepX = 0;
+    public void setStartCoordinateX(int startCoordinateX) {
+        this.startCoordinateX = startCoordinateX;
     }
 
-    public void setStartCoordinatX(int startCoordinatX) {
-        this.startCoordinatX = startCoordinatX;
+    public void setStartCoordinateY(int startCoordinateY) {
+        this.startCoordinateY = startCoordinateY;
     }
 
-    public void setStartCoordinatY(int startCoordinatY) {
-        this.startCoordinatY = startCoordinatY;
+    public void setShipSize(int shipSize) {
+        this.shipSize = shipSize;
     }
 
-    public void setShipSice(int shipSice) {
-        this.shipSice = shipSice;
-    }
 
-    public void setShipTyp(int shipTyp) {
-        this.shipTyp = shipTyp;
-    }
-
-    public void placeShipsAutomatik() {
-        setAllShipsTo0();
-
-        setShipSice(2);
-        setStartCoordinatX(1);
-        setStartCoordinatY(1);
-        setStepX(1);
-        placeShip();
-
-        setShipSice(5);
-        setStartCoordinatX(1);
-        setStartCoordinatY(3);
-        setStepX(1);
-        placeShip();
-
-        setShipSice(3);
-        setStartCoordinatX(1);
-        setStartCoordinatY(5);
-        setStepY(1);
-        placeShip();
-
-        setShipSice(3);
-        setStartCoordinatX(3);
-        setStartCoordinatY(5);
-        setStepY(1);
-        placeShip();
-    }
 }
 
 
