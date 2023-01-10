@@ -9,7 +9,7 @@ public class Placer {
     int shipSize5;
     int shipsTotal;
 
-    int HitPoints;
+    //int HitPoints;            //may be of use later on
 
     GameBoard gameBord;
 
@@ -47,10 +47,10 @@ public class Placer {
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 0; i < shipsTotal; i++) {
-            System.out.println("Available ships: \nLength 2: " + shipSize2 + "\nLength 3: " + shipSize3 + "\nLength 4: " + shipSize4 + "\nLength 5: " + shipSize5);
+            System.out.println("\nAvailable ships: \nLength 2: " + shipSize2 + "\nLength 3: " + shipSize3 + "\nLength 4: " + shipSize4 + "\nLength 5: " + shipSize5);
 
             for (;;) {
-                System.out.println("Pleace selct a available ship");
+                System.out.println("\nSelect an available ship");
                 setShipSize(scanner.nextInt());         //directly inserting user input into shipSize
 
                 if (shipAvailable(shipSize)) break;     //determining ship availability through method
@@ -61,20 +61,22 @@ public class Placer {
 
             for (;;) {
                 gameBord.printGameBoardWithShips();
-                System.out.println("Place select the start Position");
-
-                System.out.print("Row:");
-                setStartCoordinateX(scanner.nextInt() -1);
+                System.out.println("\nSelect the start Position");
 
                 System.out.print("Column:");
+                setStartCoordinateX(scanner.nextInt() -1);
+
+                System.out.print("Row:");
                 setStartCoordinateY(scanner.nextInt() -1);
 
-                System.out.print("Select the direction Down[D], Right[R]");
+                System.out.print("\nSelect the direction: Down[D], Right[R]");
                 String direction = scanner.next();
 
                 switch (direction) {
                     case "D" -> setVertical(1);
+                    case "d" -> setVertical(1);
                     case "R" -> setHorizontal(1);
+                    case "r" -> setHorizontal(1);
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
