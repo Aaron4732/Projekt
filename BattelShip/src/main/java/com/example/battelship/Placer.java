@@ -63,10 +63,10 @@ public class Placer {
                 gameBord.printGameBoardWithShips();
                 System.out.println("Place select the start Position");
 
-                System.out.print("X:");
+                System.out.print("Row:");
                 setStartCoordinateX(scanner.nextInt() -1);
 
-                System.out.print("Y:");
+                System.out.print("Column:");
                 setStartCoordinateY(scanner.nextInt() -1);
 
                 System.out.print("Select the direction Down[D], Right[R]");
