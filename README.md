@@ -4,6 +4,7 @@
 How to start the game:
 Go to the Main class, start the main method and follow the instructions in the console.
 Thats it! :)
+
 Number of available ships and gameboard size need to be set in code.
 
 # Short game instruction
