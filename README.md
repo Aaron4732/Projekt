@@ -1,8 +1,8 @@
 # Projekt
 # Battleships 
 
-How to start the game:
-Go to the Main class and start the main method and follow the instructuns in the console 
+How to start the game:\n
+Go to the Main class and start the main method and follow the instructuns in the console \n 
 Thats it 
 
 
