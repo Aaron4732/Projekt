@@ -1,6 +1,8 @@
 package com.example.battelship;
 
-
+/**
+ * This class contains all the static variables for the game
+ */
 public class Config {
     static int shipsSize2 = 0;
     static int shipsSize3 = 1;
@@ -12,14 +14,16 @@ public class Config {
     static int shipNumber = shipsSize2 *2  + shipsSize3 *3 + shipsSize4 *4 + shipsSize5 *5;
 
     //Symbols for the gamebord
-    static char water = 126;
+    static char water = '~';
     static char ship = 'S';
     static char hit = 'X';
     static char miss = 'O';
 
     static int gameBoardLength = 4;
     static int GameBoardHight = 4;
+
     public static int getShipsSize2() {
+
         return shipsSize2;
     }
     public static int getShipsSize3() {

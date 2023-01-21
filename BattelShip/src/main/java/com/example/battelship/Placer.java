@@ -11,8 +11,6 @@ public class Placer {
     int shipsSize5 = Config.getShipsSize5();
     int shipsTotal = Config.getShipsTotal();
 
-    int HitPoints;
-
     GameBoard gameBord;
 
     int gameBordLength = Config.getGameBoardLength();
@@ -30,7 +28,6 @@ public class Placer {
 
 
     public Placer(GameBoard gameBord) {
-
         this.gameBord = gameBord;
         }
 
