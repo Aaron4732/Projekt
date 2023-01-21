@@ -2,22 +2,24 @@ package com.example.battelship;
 
 public class Main {
     public static void main(String[] args) {
-
+    
         //Create the gameboard for player1
         System.out.println("Player1 please place your ships");
         GameBoard gameBoard1 = new GameBoard();
+
         gameBoard1.printGameBoard();
         System.out.println();
 
         //Create the gameboard for player2
         System.out.println("Player2 please place your ships");
+
         GameBoard gameBoard2 = new GameBoard();
         gameBoard2.printGameBoard();
         System.out.println(
 
         );
         //play the game
-        for (; ; ) {
+        for (;;){
             //make a shot on gameboard2
             System.out.println("Player1 please place your shot");
             gameBoard2.printGameBoard();
