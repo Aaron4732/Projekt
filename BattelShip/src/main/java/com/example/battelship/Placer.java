@@ -36,10 +36,10 @@ public class Placer {
 
         for (int i = 0; i < shipsTotal; i++) {
 
-            System.out.println("Available ships: \n[2] Length 2: " + shipsSize2 + "\n[3] Length 3: " + shipsSize3 + "\n[4] Length 4: " + shipsSize4 + "\n[5] Length 5: " + shipsSize5);
+            System.out.println("Available ships: \n(1) Place Speedboat: " + shipsSize2 + "\n(2) Place Submarine: " + shipsSize3 + "\n(3) Place Battleship: " + shipsSize4 + "\n(4) Place Carrier: " + shipsSize5);
 
             for (;;) {
-                System.out.println("Pleace selct a available ship by number");
+                System.out.println("Please select an available ship by writing its number into the console.");
 
                 setShipSize(scanner.nextInt());         //directly inserting user input into shipSize
 
@@ -70,7 +70,7 @@ public class Placer {
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
-                System.out.println("The Position is not availibal, select a other one");
+                System.out.println("The Position is not available, select a other one");
             }
 
             placeShip();
