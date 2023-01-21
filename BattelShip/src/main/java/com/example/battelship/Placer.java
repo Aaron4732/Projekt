@@ -36,7 +36,7 @@ public class Placer {
 
         for (int i = 0; i < shipsTotal; i++) {
 
-            System.out.println("Available ships: \n(1) Place Speedboat  ██: " + shipsSize2 + "\n(2) Place Submarine  ███: " + shipsSize3 + "\n(3) Place Battleship ████: " + shipsSize4 + "\n(4) Place Carrier    █████: " + shipsSize5);
+            System.out.println("Available ships: \n(1) Place Speedboat  ++: " + shipsSize2 + "\n(2) Place Submarine  +++: " + shipsSize3 + "\n(3) Place Battleship ++++: " + shipsSize4 + "\n(4) Place Carrier    +++++: " + shipsSize5);
 
             for (;;) {
                 System.out.println("Please select an available ship by writing its number into the console.");
