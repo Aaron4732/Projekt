@@ -70,7 +70,7 @@ public class Placer {
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
-                System.out.println("The Position is not available, select a other one");
+                System.out.println("The position is not available, select a other one");
             }
 
             placeShip();
