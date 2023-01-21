@@ -12,7 +12,7 @@ public class Config {
     static int shipNumber = shipsSize2 *2  + shipsSize3 *3 + shipsSize4 *4 + shipsSize5 *5;
 
     //Symbols for the gamebord
-    static char water = '-';
+    static char water = 126;
     static char ship = 'S';
     static char hit = 'X';
     static char miss = 'O';
