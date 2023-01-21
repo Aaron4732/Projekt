@@ -2,29 +2,18 @@ package com.example.battelship;
 
 public class Main {
     public static void main(String[] args) {
-        int gameBoardLength = 4;
-
-        //Symbols for the gameboard
-        char water = '-';
-        char ship = 'S';
-        char hit = 'X';
-        char miss = 'O';
-
-        //Set the number of ship availability ships
-        int shipsSize2 = 0;
-        int shipsSize3 = 1;
-        int shipsSize4 = 0;
-        int shipsSize5 = 0;
-
+    
         //Create the gameboard for player1
         System.out.println("Player1 please place your ships");
-        GameBoard gameBoard1 = new GameBoard (gameBoardLength, water, ship, hit, miss, shipsSize2, shipsSize3, shipsSize4, shipsSize5 );
+        GameBoard gameBoard1 = new GameBoard();
+
         gameBoard1.printGameBoard();
         System.out.println();
 
         //Create the gameboard for player2
         System.out.println("Player2 please place your ships");
-        GameBoard gameBoard2 = new GameBoard (gameBoardLength, water, ship, hit, miss, shipsSize2, shipsSize3, shipsSize4, shipsSize5 );
+
+        GameBoard gameBoard2 = new GameBoard();
         gameBoard2.printGameBoard();
         System.out.println(
 

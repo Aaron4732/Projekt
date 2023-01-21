@@ -6,50 +6,27 @@ public class GameBoard {
 
     char[][] gameBoard;
 
-    int gameBoardLength;
-    char water;
-    char ship;
-
-    char miss;
-
-    char hit;
-    int shipsSize2;
-    int shipsSize3;
-    int shipsSize4;
-    int shipsSize5;
-    int shipNumber;
-
-    int undetectedShipNumber;
+    int gameBoardLength = Config.getGameBoardLength();
+    char water = Config.getWater();
+    char ship = Config.getShip();
+    char miss = Config.getMiss();
+    char hit = Config.getHit();
+    int undetectedShipNumber = Config.getShipNumber();
 
     int[] guessCoordinates;
 
     char locationViewUpdate;
 
-    public GameBoard(int gameBoardLength, char water, char ship, char hit, char miss, int shipsSize2, int shipsSize3, int shipsSize4, int shipsSize5) {
-    // Constructor to initialize different objects of the battleship game.
-        this.gameBoardLength = gameBoardLength;
-        this.water = water;
-        this.ship = ship;
-        this.hit = hit;
-        this.miss = miss;
-        this.shipsSize2 = shipsSize2;
-        this.shipsSize3 = shipsSize3;
-        this.shipsSize4 = shipsSize4;
-        this.shipsSize5 = shipsSize5;
-
-        this.shipNumber= shipsSize2 *2  + shipsSize3 *3 + shipsSize4 *4 + shipsSize5 *5;
-        //Number of max. possible ship hits (needed to win).
-        this.undetectedShipNumber = shipNumber;
+    public GameBoard() {
 
         gameBoard = new char[gameBoardLength][gameBoardLength];
-        //creating a square gameboard with gameBoardLength as side length.
 
+        //Filling gameboard with water
         for (char[] row : gameBoard) {
             Arrays.fill(row, water);
         }
-        //Filling gameboard with water
 
-        Placer placer = new Placer(this, water, ship, shipsSize2, shipsSize3, shipsSize4, shipsSize5);
+        Placer placer = new Placer(this);
         placer.placeShipsTerminal();
     }
 
@@ -90,7 +67,6 @@ public class GameBoard {
     public void printGameBoardWithShips()
     // Method for printing gameboard with ships for placing the ships. Like the 'printGameBoard' method, but with ships visible.
     {
-        int gameBoardLength = gameBoard.length;
         System.out.print("  ");
 
         for (int i = 0; i < gameBoardLength; i++)

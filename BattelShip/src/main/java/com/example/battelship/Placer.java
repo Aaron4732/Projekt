@@ -3,21 +3,20 @@ package com.example.battelship;
 import java.util.Scanner;
 
 public class Placer {
-    int shipSize2;
-    int shipSize3;
-    int shipSize4;
-    int shipSize5;
-    int shipsTotal;
+
+    int shipsSize2 = Config.getShipsSize2();
+    int shipsSize3 = Config.getShipsSize3();
+    int shipsSize4 = Config.getShipsSize4();
+    int shipsSize5 = Config.getShipsSize5();
+    int shipsTotal = Config.getShipsTotal();
 
     //int HitPoints;            //may be of use later on
 
     GameBoard gameBord;
 
-    int gameBordLength;
-    int gameBordWidth;
-    
-    char water;
-    char ship;
+    int gameBordLength = Config.getGameBoardLength();
+    int gameBordWidth = Config.getGameBoardHight();
+    char ship = Config.getShip();
 
     int placedShips = 0;
     int startCoordinateX;
@@ -27,19 +26,8 @@ public class Placer {
     int shipSize;
 
     //Constructor for initialisation of necessary variables and objects
-    public Placer(GameBoard gameBord, char water, char ship, int shipSize2, int shipSize3, int shipSize4, int shipSize5) {
+    public Placer(GameBoard gameBord) {
         this.gameBord = gameBord;
-        this.water = water;
-        this.ship = ship;
-
-        gameBordLength = gameBord.getGameBoardLength();
-        gameBordWidth = gameBord.getGameBoardLength();
-        this.shipSize2 = shipSize2;
-        this.shipSize3 = shipSize3;
-        this.shipSize4 = shipSize4;
-        this.shipSize5 = shipSize5;
-
-        shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
         }
 
     //initial request for player choice about ship size, position and orientation
@@ -47,10 +35,12 @@ public class Placer {
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 0; i < shipsTotal; i++) {
-            System.out.println("\nAvailable ships: \nLength 2: " + shipSize2 + "\nLength 3: " + shipSize3 + "\nLength 4: " + shipSize4 + "\nLength 5: " + shipSize5);
+
+            System.out.println("Available ships: \n[2] Length 2: " + shipsSize2 + "\n[3] Length 3: " + shipsSize3 + "\n[4] Length 4: " + shipsSize4 + "\n[5] Length 5: " + shipsSize5);
 
             for (;;) {
-                System.out.println("\nSelect an available ship");
+                System.out.println("Pleace selct a available ship by number");
+
                 setShipSize(scanner.nextInt());         //directly inserting user input into shipSize
 
                 if (shipAvailable(shipSize)) break;     //determining ship availability through method
@@ -80,6 +70,7 @@ public class Placer {
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
+                System.out.println("The Position is not availibal, select a other one");
             }
 
             placeShip();
@@ -89,20 +80,20 @@ public class Placer {
 
     private boolean shipAvailable(int shipSize) {
         return switch (shipSize) {
-            case 2 -> (shipSize2 > 0);
-            case 3 -> (shipSize3 > 0);
-            case 4 -> (shipSize4 > 0);
-            case 5 -> (shipSize5 > 0);
+            case 2 -> (shipsSize2 > 0);
+            case 3 -> (shipsSize3 > 0);
+            case 4 -> (shipsSize4 > 0);
+            case 5 -> (shipsSize5 > 0);
             default -> false;
         };
     }
 
     private void reduceShip(int shipSize) {
         switch (shipSize) {
-            case 2 -> shipSize2--;
-            case 3 -> shipSize3--;
-            case 4 -> shipSize4--;
-            case 5 -> shipSize5--;
+            case 2 -> shipsSize2--;
+            case 3 -> shipsSize3--;
+            case 4 -> shipsSize4--;
+            case 5 -> shipsSize5--;
         }
     }
 
@@ -147,32 +138,6 @@ public class Placer {
             gameBord.setCharOnCoordinate(startCoordinateX + horizontal * i, startCoordinateY + vertical * i, ship);  //hor/ver have own methods
         }
         placedShips++;
-    }
-
-
-    // collection of methods for future expansions of the program / used methods in code instead of variables
-    public void setShipSize2(int shipSize2) {
-        this.shipSize2 = shipSize2;
-        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
-        int HitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
-    }
-
-    public void setShipSize3(int shipSize3) {
-        this.shipSize3 = shipSize3;
-        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
-        int shipsHitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
-    }
-
-    public void setShipSize4(int shipSize4) {
-        this.shipSize4 = shipSize4;
-        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
-        int shipsHitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
-    }
-
-    public void setShipSize5(int shipSize5) {
-        this.shipSize5 = shipSize5;
-        /*shipsTotal = shipSize2 + shipSize3 + shipSize4 + shipSize5;
-        int shipsHitPoints = shipSize2 *2  + shipSize3 *3 + shipSize4 *4 + shipSize5 *5;*/
     }
 
     public void setHorizontal(int horizontal) {
