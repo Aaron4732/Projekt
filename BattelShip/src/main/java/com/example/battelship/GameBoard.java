@@ -2,6 +2,9 @@ package com.example.battelship;
 
 import java.util.Arrays;
 
+/**
+ * This class creates a gamebord and contains all methods to play a game
+ */
 public class GameBoard {
 
     char[][] gameBoard;
@@ -18,7 +21,7 @@ public class GameBoard {
     char locationViewUpdate;
 
     /**
-     * This class creates a gamebord
+     * Creates a gamebord and place the ships
      */
 
     public GameBoard() {
