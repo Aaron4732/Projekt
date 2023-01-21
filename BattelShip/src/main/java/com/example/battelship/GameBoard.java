@@ -17,6 +17,10 @@ public class GameBoard {
 
     char locationViewUpdate;
 
+    /**
+     *
+     */
+
     public GameBoard() {
 
         gameBoard = new char[gameBoardLength][gameBoardLength];
