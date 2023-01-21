@@ -4,12 +4,13 @@ import java.util.Scanner;
 
 public class Placer {
 
-
     int shipsSize2 = Config.getShipsSize2();
     int shipsSize3 = Config.getShipsSize3();
     int shipsSize4 = Config.getShipsSize4();
     int shipsSize5 = Config.getShipsSize5();
     int shipsTotal = Config.getShipsTotal();
+
+    int HitPoints;
 
     GameBoard gameBord;
 
@@ -25,15 +26,12 @@ public class Placer {
     int shipSize;
 
     //Constructor for initialisation of necessary variables and objects
-
-
     public Placer(GameBoard gameBord) {
         this.gameBord = gameBord;
         }
 
     //initial request for player choice about ship size, position and orientation
     public void placeShipsTerminal() {
-
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 0; i < shipsTotal; i++) {
