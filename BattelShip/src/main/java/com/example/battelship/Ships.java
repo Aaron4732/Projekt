@@ -2,8 +2,15 @@ package com.example.battelship;
 
 import java.util.Random;
 
+/**
+ * old class used before version with user input / generating random coordinates
+ */
 public class Ships {
-    //A class for the ships to prevent methods for interaction with ships
+    /**
+     * coordinates get randomly generated and returned in an int array
+      * @param gameBoardLength
+     * @return
+     */
 
     public static int[] generateShipCoordinates(int gameBoardLength) {
         //the method generate random ship coordinates 1x1 and return them in a list
