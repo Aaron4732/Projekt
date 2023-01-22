@@ -7,8 +7,8 @@ public class Main {
         System.out.println("Player1 place your ships\n");
         GameBoard gameBoard1 = new GameBoard();
 
-        gameBoard1.printGameBoard();
-        System.out.println();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
         //Create the gameboard for player2
         System.out.println("Player2 place your ships\n");
