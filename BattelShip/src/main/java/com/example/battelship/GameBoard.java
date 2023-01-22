@@ -118,17 +118,20 @@ public class GameBoard {
 
         if (target == ship)
         {
-            message = "Hit!";
+            message = "    Hit!";
             target = hit;
         } else if (target == water)
         {
-            message = "Miss!";
+            message = "  Miss! :(";
             target = miss;
         } else
         {
             message = "Already hit!";
         }
+        System.out.println("\n************");
         System.out.println(message);
+        System.out.println("************\n");
+
 
         locationViewUpdate = target;
     }
