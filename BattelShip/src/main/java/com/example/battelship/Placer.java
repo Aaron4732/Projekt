@@ -15,10 +15,10 @@ public class Placer {
 
     int HitPoints;
 
-    GameBoard gameBord;
+    GameBoard gameBoard;
 
-    int gameBordLength = Config.getGameBoardLength();
-    int gameBordWidth = Config.getGameBoardHight();
+    int gameBoardLength = Config.getGameBoardLength();
+    int gameBoardWidth = Config.getGameBoardLength();
     char ship = Config.getShip();
 
     int placedShips = 0;
@@ -30,10 +30,10 @@ public class Placer {
 
     /**
      * initialisation of placer object / take gameboard
-     * @param gameBord
+     * @param gameBoard
      */
-    public Placer(GameBoard gameBord) {
-        this.gameBord = gameBord;
+    public Placer(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
         }
 
     /**
@@ -59,8 +59,8 @@ public class Placer {
             reduceShip(shipSize);
 
             for (;;) {
-                gameBord.printGameBoardWithShips();
-                System.out.println("Place select the start Position");
+                gameBoard.printGameBoardWithShips();
+                System.out.println("Please select the start Position");
 
                 System.out.print("Row:");
                 setStartCoordinateY(scanner.nextInt() -1);
@@ -68,15 +68,12 @@ public class Placer {
                 System.out.print("Column:");
                 setStartCoordinateX(scanner.nextInt() -1);
 
-                while (horizontal < 1 && vertical < 1) {
-                    System.out.print("Select the direction Down[D], Right[R]");
-                    String direction = scanner.next();
+                System.out.print("Select the direction Down[D], Right[R]");
+                String direction = scanner.next();
 
-                    switch (direction) {
-                        case "D" -> setVertical(1);
-                        case "R" -> setHorizontal(1);
-                        default -> System.out.println("The input was not correct ");
-                    }
+                switch (direction) {
+                    case "D" -> setVertical(1);
+                    case "R" -> setHorizontal(1);
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
@@ -84,7 +81,7 @@ public class Placer {
             }
 
             placeShip();
-            gameBord.printGameBoardWithShips();
+            gameBoard.printGameBoardWithShips();
         }
     }
 
@@ -124,13 +121,13 @@ public class Placer {
         //checking all variations that are outside of gameBoard
         if (
                 startCoordinateX < 0 ||
-                        startCoordinateX >= gameBordLength ||
+                        startCoordinateX >= gameBoardLength ||
                         startCoordinateY < 0 ||
-                        startCoordinateY >= gameBordLength ||
+                        startCoordinateY >= gameBoardLength ||
                         startCoordinateX + shipSize * horizontal < 0 ||
-                        startCoordinateX + shipSize * horizontal > gameBordWidth ||
+                        startCoordinateX + shipSize * horizontal > gameBoardWidth ||
                         startCoordinateY + shipSize * vertical < 0 ||
-                        startCoordinateY + shipSize * vertical > gameBordWidth
+                        startCoordinateY + shipSize * vertical > gameBoardWidth
         ) {
             return false;
         }
@@ -139,15 +136,15 @@ public class Placer {
         for (int i = -1; i < (shipSize -1)* vertical +3-1; i++) {
 
             //When the field is outside the grid, it gets ignored
-            if (startCoordinateY +i < 0 || startCoordinateY +i >= gameBordLength) continue;
+            if (startCoordinateY +i < 0 || startCoordinateY +i >= gameBoardLength) continue;
 
             for (int k = -1; k < (shipSize -1)* horizontal +3-1; k++) {
 
                 //When the field is outside the grid, it gets ignored
-                if (startCoordinateX +k < 0 || startCoordinateX +k >= gameBordWidth) continue;
+                if (startCoordinateX +k < 0 || startCoordinateX +k >= gameBoardWidth) continue;
 
                 //return false when a field is not free
-                if (gameBord.getCharOfCoordinate(startCoordinateX + k, startCoordinateY +i) == ship) {
+                if (gameBoard.getCharOfCoordinate(startCoordinateX + k, startCoordinateY +i) == ship) {
                     return false;
                 }
             }
@@ -161,7 +158,7 @@ public class Placer {
      */
     private void placeShip() {
         for (int i = 0; i < shipSize; i++) {
-            gameBord.setCharOnCoordinate(startCoordinateX + horizontal * i, startCoordinateY + vertical * i, ship);  //hor/ver have own methods
+            gameBoard.setCharOnCoordinate(startCoordinateX + horizontal * i, startCoordinateY + vertical * i, ship);  //hor/ver have own methods
         }
         placedShips++;
     }
