@@ -68,6 +68,7 @@ public class Placer {
                 System.out.print("Column:");
                 setStartCoordinateX(scanner.nextInt() -1);
 
+                setVertical(0);
                 while (horizontal < 1 && vertical < 1) {
                     System.out.print("Select the direction Down[D], Right[R]");
                     String direction = scanner.next();
