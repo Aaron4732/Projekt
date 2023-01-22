@@ -68,12 +68,15 @@ public class Placer {
                 System.out.print("Column:");
                 setStartCoordinateX(scanner.nextInt() -1);
 
-                System.out.print("Select the direction Down[D], Right[R]");
-                String direction = scanner.next();
+                while (horizontal < 1 && vertical < 1) {
+                    System.out.print("Select the direction Down[D], Right[R]");
+                    String direction = scanner.next();
 
-                switch (direction) {
-                    case "D" -> setVertical(1);
-                    case "R" -> setHorizontal(1);
+                    switch (direction) {
+                        case "D" -> setVertical(1);
+                        case "R" -> setHorizontal(1);
+                        default -> System.out.println("The input was not correct ");
+                    }
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
