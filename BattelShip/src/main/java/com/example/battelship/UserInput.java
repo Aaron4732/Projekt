@@ -2,8 +2,17 @@ package com.example.battelship;
 
 import java.util.Scanner;
 
+/**
+ * class with a method to read user input
+ */
+
 public class UserInput {
-    //A class to get information from the user input
+
+    /**
+     * get x and y coordinate and return them in an int array
+     * @param gameBoardLength
+     * @return
+     */
 
     public static int[] getUserCoordinates(int gameBoardLength) {
         //ask the user in the terminal row and column coordinates and return them in a list
@@ -22,7 +31,7 @@ public class UserInput {
 
         do
         {
-            //aks the user for the coordinates of the row
+            //ask user for the coordinates of the row
             System.out.println("Row: ");
             coordinateY = new Scanner(System.in).nextInt();
             //check that the input coordinates are not smaller than 0 and not bigger than the gamebord

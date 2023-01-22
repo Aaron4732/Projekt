@@ -2,6 +2,9 @@ package com.example.battelship;
 
 import java.util.Scanner;
 
+/**
+ * contains all methods for initial choice and placement of the ships / checks for validity
+ */
 public class Placer {
 
     int shipsSize2 = Config.getShipsSize2();
@@ -25,12 +28,17 @@ public class Placer {
     int vertical = 0;
     int shipSize;
 
-    //Constructor for initialisation of necessary variables and objects
+    /**
+     * initialisation of placer object / take gameboard
+     * @param gameBord
+     */
     public Placer(GameBoard gameBord) {
         this.gameBord = gameBord;
         }
 
-    //initial request for player choice about ship size, position and orientation
+    /**
+     * Terminal output for ship position and direction
+     */
     public void placeShipsTerminal() {
         Scanner scanner = new Scanner(System.in);
 
@@ -78,6 +86,11 @@ public class Placer {
         }
     }
 
+    /**
+     * returns wether if ships are still available
+     * @param shipSize
+     * @return
+     */
     private boolean shipAvailable(int shipSize) {
         return switch (shipSize) {
             case 2 -> (shipsSize2 > 0);
@@ -88,6 +101,10 @@ public class Placer {
         };
     }
 
+    /**
+     * reduce amount of available ships after ship selection
+     * @param shipSize
+     */
     private void reduceShip(int shipSize) {
         switch (shipSize) {
             case 2 -> shipsSize2--;
@@ -97,6 +114,10 @@ public class Placer {
         }
     }
 
+    /**
+     * checks placer selection of coordinates for validity
+      * @return
+     */
     private boolean positionFreeForShip() {
         //checking all variations that are outside of gameBoard
         if (
@@ -133,6 +154,9 @@ public class Placer {
         return true;
     }
 
+    /**
+     *takes user coordinates and modifies them with choice about direction / increments number of placed ships
+     */
     private void placeShip() {
         for (int i = 0; i < shipSize; i++) {
             gameBord.setCharOnCoordinate(startCoordinateX + horizontal * i, startCoordinateY + vertical * i, ship);  //hor/ver have own methods
@@ -140,24 +164,44 @@ public class Placer {
         placedShips++;
     }
 
+    /**
+     * sets values for horizontal positioning of the ship
+     * @param horizontal
+     */
     public void setHorizontal(int horizontal) {
         this.horizontal = horizontal;
         this.vertical = 0;
     }
 
+    /**
+     * sets values for vertical positioning of the ship
+     * @param vertical
+     */
     public void setVertical(int vertical) {
         this.vertical = vertical;
         this.horizontal = 0;
     }
 
+    /**
+     * sets values for x coordinate
+     * @param startCoordinateX
+     */
     public void setStartCoordinateX(int startCoordinateX) {
         this.startCoordinateX = startCoordinateX;
     }
 
+    /**
+     * sets values for y coordinate
+     * @param startCoordinateY
+     */
     public void setStartCoordinateY(int startCoordinateY) {
         this.startCoordinateY = startCoordinateY;
     }
 
+    /**
+     * sets values for ship size
+     * @param shipSize
+     */
     public void setShipSize(int shipSize) {
         this.shipSize = shipSize;
     }
