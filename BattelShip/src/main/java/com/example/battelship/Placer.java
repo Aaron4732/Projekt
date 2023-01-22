@@ -10,7 +10,7 @@ public class Placer {
     int shipsSize5 = Config.getShipsSize5();
     int shipsTotal = Config.getShipsTotal();
 
-    //int HitPoints;            //may be of use later on
+    int HitPoints;
 
     GameBoard gameBord;
 
@@ -43,6 +43,7 @@ public class Placer {
 
                 setShipSize(scanner.nextInt() + 1);         //directly inserting user input into shipSize
 
+
                 if (shipAvailable(shipSize)) break;     //determining ship availability through method
 
                 System.out.println("Ship is not available!");
@@ -51,22 +52,20 @@ public class Placer {
 
             for (;;) {
                 gameBord.printGameBoardWithShips();
-                System.out.println("\nSelect the start Position");
-
-                System.out.print("Column:");
-                setStartCoordinateX(scanner.nextInt() -1);
+                System.out.println("Place select the start Position");
 
                 System.out.print("Row:");
+                setStartCoordinateX(scanner.nextInt() -1);
+
+                System.out.print("Column:");
                 setStartCoordinateY(scanner.nextInt() -1);
 
-                System.out.print("\nSelect the direction: Down[D], Right[R]");
+                System.out.print("Select the direction Down[D], Right[R]");
                 String direction = scanner.next();
 
                 switch (direction) {
                     case "D" -> setVertical(1);
-                    case "d" -> setVertical(1);
                     case "R" -> setHorizontal(1);
-                    case "r" -> setHorizontal(1);
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement

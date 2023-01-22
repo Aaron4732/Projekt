@@ -3,14 +3,18 @@ package com.example.battelship;
 import java.util.Scanner;
 
 public class UserInput {
+
+
     //A class to get information from the user input
 
-    public static int[] getUserCoordinates(int gameBoardLength) {
+    public static int[] getUserCoordinates() {
         //ask the user in the terminal row and column coordinates and return them in a list
 
         //static variables for the coordinates
         int coordinateY;
         int coordinateX;
+
+        int gameBoardLength = Config.getGameBoardLength();
 
         do
         {
