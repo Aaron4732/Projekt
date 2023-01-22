@@ -14,12 +14,15 @@ public class UserInput {
      * @return
      */
 
-    public static int[] getUserCoordinates(int gameBoardLength) {
+
+    public static int[] getUserCoordinates() {
         //ask the user in the terminal row and column coordinates and return them in a list
 
         //static variables for the coordinates
         int coordinateY;
         int coordinateX;
+
+        int gameBoardLength = Config.getGameBoardLength();
 
         do
         {

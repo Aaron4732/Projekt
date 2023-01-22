@@ -13,7 +13,7 @@ public class Placer {
     int shipsSize5 = Config.getShipsSize5();
     int shipsTotal = Config.getShipsTotal();
 
-    //int HitPoints;            //may be of use later on
+    int HitPoints;
 
     GameBoard gameBord;
 
@@ -44,12 +44,13 @@ public class Placer {
 
         for (int i = 0; i < shipsTotal; i++) {
 
-            System.out.println("Available ships: \n[2] Length 2: " + shipsSize2 + "\n[3] Length 3: " + shipsSize3 + "\n[4] Length 4: " + shipsSize4 + "\n[5] Length 5: " + shipsSize5);
+            System.out.println("Available ships: \n(1) Place Speedboat  ++: " + shipsSize2 + "\n(2) Place Submarine  +++: " + shipsSize3 + "\n(3) Place Battleship ++++: " + shipsSize4 + "\n(4) Place Carrier    +++++: " + shipsSize5);
 
             for (;;) {
-                System.out.println("Pleace selct a available ship by number");
+                System.out.println("Please select an available ship by writing its number into the console.");
 
-                setShipSize(scanner.nextInt());         //directly inserting user input into shipSize
+                setShipSize(scanner.nextInt() + 1);         //directly inserting user input into shipSize
+
 
                 if (shipAvailable(shipSize)) break;     //determining ship availability through method
 
@@ -59,26 +60,24 @@ public class Placer {
 
             for (;;) {
                 gameBord.printGameBoardWithShips();
-                System.out.println("\nSelect the start Position");
-
-                System.out.print("Column:");
-                setStartCoordinateX(scanner.nextInt() -1);
+                System.out.println("Place select the start Position");
 
                 System.out.print("Row:");
+                setStartCoordinateX(scanner.nextInt() -1);
+
+                System.out.print("Column:");
                 setStartCoordinateY(scanner.nextInt() -1);
 
-                System.out.print("\nSelect the direction: Down[D], Right[R]");
+                System.out.print("Select the direction Down[D], Right[R]");
                 String direction = scanner.next();
 
                 switch (direction) {
                     case "D" -> setVertical(1);
-                    case "d" -> setVertical(1);
                     case "R" -> setHorizontal(1);
-                    case "r" -> setHorizontal(1);
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
-                System.out.println("The Position is not availibal, select a other one");
+                System.out.println("The position is not available, select another one");
             }
 
             placeShip();

@@ -2,6 +2,9 @@ package com.example.battelship;
 
 import java.util.Arrays;
 
+/**
+ * This class creates a gamebord and contains all methods to play a game
+ */
 public class GameBoard {
 
     char[][] gameBoard;
@@ -17,6 +20,10 @@ public class GameBoard {
 
     char locationViewUpdate;
 
+    /**
+     * Creates a gamebord and place the ships
+     */
+
     public GameBoard() {
 
         gameBoard = new char[gameBoardLength][gameBoardLength];
@@ -28,10 +35,14 @@ public class GameBoard {
 
         Placer placer = new Placer(this);
         placer.placeShipsTerminal();
+
     }
 
+    /**
+     * Print the gamebord to the terminal
+     * The ships get hint behind water
+     */
     public void printGameBoard()
-    //Method to create console layout of gameboard
     {
         int gameBoardLength = gameBoard.length;
         //creating variable for gameboard.length for performance.
@@ -64,6 +75,9 @@ public class GameBoard {
         }
     }
 
+    /**
+     * Print the gamebord to the terminal
+     */
     public void printGameBoardWithShips()
     // Method for printing gameboard with ships for placing the ships. Like the 'printGameBoard' method, but with ships visible.
     {
@@ -101,15 +115,19 @@ public class GameBoard {
     }
     */
 
+    /**
+     * Method to change User guesses for row and col values into gameBoard coordinates.
+     */
     private void updateGameBoard() {
-        //Method to change User guesses for row and col values into gameBoard coordinates.
         int row = guessCoordinates[0];
         int col = guessCoordinates[1];
         gameBoard[row][col] = locationViewUpdate;
     }
 
+    /**
+     * Method to check if User guess (input coordinates) are a hit or a miss and change the value on the gamebord.
+     */
     private void checkCoordinatesOnGameBoard() {
-        //Method to check if User guess (input coordinates) are a hit or a miss.
         String message;
         int row = guessCoordinates[0];
         int col = guessCoordinates[1];
@@ -118,22 +136,31 @@ public class GameBoard {
 
         if (target == ship)
         {
-            message = "Hit!";
+            message = "    Hit!";
             target = hit;
         } else if (target == water)
         {
-            message = "Miss!";
+            message = "  Miss! :(";
             target = miss;
         } else
         {
             message = "Already hit!";
         }
+        System.out.println("\n************");
         System.out.println(message);
+        System.out.println("************\n");
+
 
         locationViewUpdate = target;
     }
+
+    /**
+     * The method to make the shoot
+     * Use the UserInput class to get the coordinates and the checkCoordinatesOnGameBoard method to place the shoot
+     * Manage the number of undetectedShipsNumber
+     */
     public void userTarget() {
-        guessCoordinates = UserInput.getUserCoordinates(gameBoardLength);
+        guessCoordinates = UserInput.getUserCoordinates();
         //Getting the User input coordinates.
         checkCoordinatesOnGameBoard();
         if (locationViewUpdate == hit)
@@ -144,10 +171,6 @@ public class GameBoard {
         updateGameBoard();
     }
 
-    public int getGameBoardLength() {
-        return gameBoardLength;
-    }
-
     public char getCharOfCoordinate(int X, int Y) {
         return gameBoard[Y][X];
     }
@@ -156,6 +179,10 @@ public class GameBoard {
         gameBoard[Y][X] = newValue;
     }
 
+    /**
+     *
+     * @return a boolean value if the game is over or not
+     */
     public boolean gameIsOver() {
         //method for checking of all ships have been hit and game is over.
         return (undetectedShipNumber <= 0);
