@@ -10,7 +10,7 @@ public class Placer {
     int shipsSize5 = Config.getShipsSize5();
     int shipsTotal = Config.getShipsTotal();
 
-    //int HitPoints;            //may be of use later on
+    int HitPoints;
 
     GameBoard gameBord;
 
@@ -35,12 +35,10 @@ public class Placer {
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 0; i < shipsTotal; i++) {
-
             System.out.println("Available ships: \n[2] Length 2: " + shipsSize2 + "\n[3] Length 3: " + shipsSize3 + "\n[4] Length 4: " + shipsSize4 + "\n[5] Length 5: " + shipsSize5);
 
             for (;;) {
                 System.out.println("Pleace selct a available ship by number");
-
                 setShipSize(scanner.nextInt());         //directly inserting user input into shipSize
 
                 if (shipAvailable(shipSize)) break;     //determining ship availability through method
@@ -51,22 +49,20 @@ public class Placer {
 
             for (;;) {
                 gameBord.printGameBoardWithShips();
-                System.out.println("\nSelect the start Position");
-
-                System.out.print("Column:");
-                setStartCoordinateX(scanner.nextInt() -1);
+                System.out.println("Place select the start Position");
 
                 System.out.print("Row:");
+                setStartCoordinateX(scanner.nextInt() -1);
+
+                System.out.print("Column:");
                 setStartCoordinateY(scanner.nextInt() -1);
 
-                System.out.print("\nSelect the direction: Down[D], Right[R]");
+                System.out.print("Select the direction Down[D], Right[R]");
                 String direction = scanner.next();
 
                 switch (direction) {
                     case "D" -> setVertical(1);
-                    case "d" -> setVertical(1);
                     case "R" -> setHorizontal(1);
-                    case "r" -> setHorizontal(1);
                 }
 
                 if (positionFreeForShip()) break;       //method returns boolean, so simple statement
